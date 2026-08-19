@@ -1,0 +1,27 @@
+[project]
+name = "katala-match"
+version = "0.1.0"
+description = "Needs-matching primitives: person models, mediation with translation loss, anti-bubble selection, and measured LLM config optimization"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Nicolas0315" }]
+dependencies = [
+  "pydantic>=2.5.0",
+]
+
+[project.optional-dependencies]
+gemini = ["google-genai>=1.0.0"]
+anthropic = ["anthropic>=0.39.0"]
+dev = ["pytest>=8.0.0"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/katala_match"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
