@@ -73,7 +73,7 @@ def test_bifurcation_map_dominant_pole_empty_defaults_to_known():
 
 def test_bifurcation_map_stores_bifurcation_points():
     bmap = BifurcationMap(person_id="p1")
-    bp = BifurcationPoint(node_id="bp1", label="location", question="城南か城北か")
+    bp = BifurcationPoint(node_id="bp1", label="location", question="option A or option B")
     bmap.add_bifurcation(bp)
     assert len(bmap.bifurcation_points) == 1
     assert bmap.bifurcation_points[0].label == "location"
@@ -167,10 +167,10 @@ def test_core_layer_coverage_score_zero_when_no_overlap():
 
 
 def test_score_candidate_hard_constraint_failure_returns_zero():
-    person = _make_person("p1", hard_constraints={"rent_max": 12})
+    person = _make_person("p1", hard_constraints={"salary_min": 12})
     core = build_core_layer(person)
     # Candidate violates hard constraint.
-    score = score_candidate_with_core(core, {"rent_max": 15})
+    score = score_candidate_with_core(core, {"salary_min": 15})
     assert score == 0.0
 
 
@@ -292,7 +292,7 @@ def test_rebuild_core_attractor_nodes_are_independent_copies():
 
 def test_rebuild_core_bifurcation_points_are_independent_copies():
     """BifurcationPoint nodes must not be shared between windows."""
-    bp = BifurcationPoint(node_id="bp1", label="city", question="城南か城北か")
+    bp = BifurcationPoint(node_id="bp1", label="city", question="option A or option B")
     person = _make_person("p1")
     core_w0 = build_core_layer(person, bifurcations=[bp], window_id="w0")
     core_w1 = rebuild_core(core_w0, new_window_id="w1")
@@ -334,7 +334,7 @@ def test_rebuild_core_additional_bifurcations_injected():
     person = _make_person("p1")
     core_w0 = build_core_layer(person, window_id="w0")
     extra_bp = BifurcationPoint(
-        node_id="bp99", label="finance", question="買うか借りるか"
+        node_id="bp99", label="finance", question="commit now or defer"
     )
     core_w1 = rebuild_core(
         core_w0, new_window_id="w1", additional_bifurcations=[extra_bp]

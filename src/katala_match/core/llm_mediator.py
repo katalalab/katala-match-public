@@ -57,7 +57,7 @@ def build_llm_mediator_prompt(context: MatchContext, deterministic: MediationRes
     return f"""{KATALA_MEDIATOR_PROMPT}
 
 Domain: {context.domain}
-Candidate: {context.compact_candidate()}
+Candidate: {context.candidate_id} {context.candidate_label} {context.candidate_payload}
 People: {people}
 Messages: {messages}
 Deterministic mediator result: {deterministic.model_dump(mode="json")}

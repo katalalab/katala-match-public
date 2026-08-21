@@ -19,14 +19,6 @@ class MatchContext(BaseModel):
     messages: list[PersonMessage] = Field(default_factory=list)
     shared_context: dict[str, Any] = Field(default_factory=dict)
 
-    def compact_candidate(self) -> dict[str, Any]:
-        keys = [
-            "id", "name", "building_name", "layout", "rent_man", "size_m2",
-            "year", "access", "futako_min", "shibuya_min", "structure",
-            "total_floors", "my_floor", "address",
-        ]
-        return {key: self.candidate_payload.get(key) for key in keys if key in self.candidate_payload}
-
     def all_variable_names(self) -> list[str]:
         names = []
         for person in self.people:
