@@ -132,3 +132,5 @@ production integrations.
 ## License
 
 MIT — see [LICENSE](LICENSE).
+
+- [Repository hygiene](.gitignore)
